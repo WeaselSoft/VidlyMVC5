@@ -194,6 +194,14 @@
     <Compile Include="Migrations\201608051653409_UpdateNameTableMemebershipType.Designer.cs">
       <DependentUpon>201608051653409_UpdateNameTableMemebershipType.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\201608051747506_AddBirthdayColumnCustomerTable.cs" />
+    <Compile Include="Migrations\201608051747506_AddBirthdayColumnCustomerTable.Designer.cs">
+      <DependentUpon>201608051747506_AddBirthdayColumnCustomerTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\201608051748476_UpdateValueBirthdayCustomer.cs" />
+    <Compile Include="Migrations\201608051748476_UpdateValueBirthdayCustomer.Designer.cs">
+      <DependentUpon>201608051748476_UpdateValueBirthdayCustomer.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Customer.cs" />
@@ -301,6 +309,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\201608051653409_UpdateNameTableMemebershipType.resx">
       <DependentUpon>201608051653409_UpdateNameTableMemebershipType.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608051747506_AddBirthdayColumnCustomerTable.resx">
+      <DependentUpon>201608051747506_AddBirthdayColumnCustomerTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\201608051748476_UpdateValueBirthdayCustomer.resx">
+      <DependentUpon>201608051748476_UpdateValueBirthdayCustomer.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
