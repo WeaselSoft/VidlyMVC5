@@ -3,8 +3,14 @@
     ViewBag.Title = "New Movie";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
-<h2>New Movie</h2>
+@if (ViewContext.RouteData.Values["action"].ToString() == "New")
+{
+    <h2>New Movie</h2>
+}
+else
+{
+    <h2>Edit Movie</h2>
+}
 @using (Html.BeginForm("Create", "Movies"))
 {
     <div class="form-group">
@@ -24,7 +30,7 @@
     </div>
     <div class="form-group">
         @Html.LabelFor(m => m.Movie.Stock)
-        @Html.TextBoxFor(m => m.Movie.Stock, "{0:d MMM yyyy}", new { @class = "form-control" })
+        @Html.TextBoxFor(m => m.Movie.Stock, new { @class = "form-control" })
     </div>
     @Html.HiddenFor(m => m.Movie.Id)
     <button type="submit" class="btn btn-primary">Save</button>
