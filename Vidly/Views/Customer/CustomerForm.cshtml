@@ -25,5 +25,6 @@
     <div class="checkbox">
         @Html.CheckBoxFor(m => m.Customer.IsSubscribedToNewsletter) Subscribe to Newsletter ?
     </div>
+    @Html.HiddenFor(m => m.Customer.id)
     <button type="submit" class="btn btn-primary">Save</button>
 }

@@ -58,7 +58,7 @@ namespace Vidly.Controllers
                 _context.Customers.Add(customer);
             else
             {
-                var customerInDb = _context.Customers.SingleOrDefault(c => c.id == customer.id);
+                var customerInDb = _context.Customers.Single(c => c.id == customer.id);
                 customerInDb.Name = customer.Name;
                 customerInDb.Birthday = customer.Birthday;
                 customerInDb.MembershipTypeId = customer.MembershipTypeId;

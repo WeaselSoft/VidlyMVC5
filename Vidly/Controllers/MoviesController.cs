@@ -23,49 +23,49 @@ namespace Vidly.Controllers
             _context.Dispose();
         }
 
-        public ActionResult Random()
-        {
-            var movie = new Movie() { Name = "Shrek" };
-            var customers = new List<Customer>
-            {
-                new Customer { Name = "Customer 1" },
-                new Customer { Name = "Customer 2" },
-                new Customer { Name = "Customer 3" },
-                new Customer { Name = "Customer 4" },
-                new Customer { Name = "Customer 5" },
-                new Customer { Name = "Customer 6" }
-            };
+        //public ActionResult Random()
+        //{
+        //    var movie = new Movie() { Name = "Shrek" };
+        //    var customers = new List<Customer>
+        //    {
+        //        new Customer { Name = "Customer 1" },
+        //        new Customer { Name = "Customer 2" },
+        //        new Customer { Name = "Customer 3" },
+        //        new Customer { Name = "Customer 4" },
+        //        new Customer { Name = "Customer 5" },
+        //        new Customer { Name = "Customer 6" }
+        //    };
 
-            var viewModel = new RandomMovieViewModel
-            {
-                Movie = movie,
-                Customers = customers
-            };
+        //    var viewModel = new RandomMovieViewModel
+        //    {
+        //        Movie = movie,
+        //        Customers = customers
+        //    };
 
-            return View(viewModel);
-        }
+        //    return View(viewModel);
+        //}
 
         public ActionResult Edit(int id)
         {
             return Content("id= " + id);
         }
 
-        public ActionResult Index1(int? pageIndex, string sortBy)
-        {
-            if (!pageIndex.HasValue)
-                pageIndex = 1;
+        //public ActionResult Index1(int? pageIndex, string sortBy)
+        //{
+        //    if (!pageIndex.HasValue)
+        //        pageIndex = 1;
 
-            if (String.IsNullOrWhiteSpace(sortBy))
-                sortBy = "Name";
+        //    if (String.IsNullOrWhiteSpace(sortBy))
+        //        sortBy = "Name";
 
-            return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
-        }
+        //    return Content(String.Format("pageIndex={0}&sortBy={1}", pageIndex, sortBy));
+        //}
 
-        [Route("movies/released/{year}/{month:regex(\\d{2}):range(1, 12)}")]
-        public ActionResult ByReleaseDate(int year, int month)
-        {
-            return Content(year + "/" + month);
-        }
+        //[Route("movies/released/{year}/{month:regex(\\d{2}):range(1, 12)}")]
+        //public ActionResult ByReleaseDate(int year, int month)
+        //{
+        //    return Content(year + "/" + month);
+        //}
 
         public ViewResult Index()
         {
@@ -83,6 +83,39 @@ namespace Vidly.Controllers
                 return HttpNotFound();
 
             return View(movies);
+        }
+
+        [HttpPost]
+        public ActionResult Create(Movie movie)
+        {
+            if (movie.Id == 0)
+            {
+                movie.AddedDate = DateTime.Now;
+                _context.Movies.Add(movie);
+            }
+            else
+            {
+                var movieInDb = _context.Movies.Single(m => m.Id == movie.Id);
+                movieInDb.Name = movie.Name;
+                movieInDb.ReleaseDate = movie.ReleaseDate;
+                movieInDb.Stock = movie.Stock;
+                movieInDb.GenreId = movie.GenreId;
+            }
+
+            _context.SaveChanges();
+
+            return RedirectToAction("Index", "Movies");
+        }
+
+        public ActionResult New()
+        {
+            var genres = _context.Genres.ToList();
+            var viewModel = new MovieFormViewModel
+            {
+                Genre = genres
+            };
+
+            return View("MovieForm", viewModel);
         }
     }
 }
